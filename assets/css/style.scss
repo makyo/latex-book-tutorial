@@ -1,0 +1,24 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.LaTeX {
+    font-size: 1em;
+    font-family: "Times New Roman", serif;
+    text-transform: uppercase;
+
+    sup {
+        top: auto;
+        font-size: 0.85em;
+        vertical-align: 0.15em;
+        margin-left: -0.36em;
+        margin-right: -0.15em;
+    }
+    sub {
+        bottom: auto;
+        vertical-align: -0.5ex;
+        margin-left: -0.1667em;
+        margin-right: -0.125em;
+    }
+}
