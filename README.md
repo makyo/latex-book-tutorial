@@ -1,37 +1,15 @@
-## Welcome to GitHub Pages
+## Welcome to the tutorial!
 
-You can use the [editor on GitHub](https://github.com/makyo/latex-book-tutorial/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+In this tutorial, we'll be creating a book in LaTeX from scratch. We'll go through the process of setting up the content, the display, custom design, copyediting and proofing, preparing for printing, and conversions. The tutorial will be broken into lessons
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## What is this repository?
 
-### Markdown
+This repository contains the lessons themselves. It's not necessarily meant to be viewed on its own, but can be if you want. If you want to go through the lessons one by one, you can do so through the page [LaTeX Book](https://makyo.github.io/latex-book).
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+This repository steps through the creation of a book through the use of git tags. You can follow along by pulling each successive tag. The `latex-book` repository uses git submodules to present each page as a lesson.
 
-```markdown
-Syntax highlighted code block
+## Who are you?
 
-# Header 1
-## Header 2
-### Header 3
+I'm a giant nerd.
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/makyo/latex-book-tutorial/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+I'm also an editor, copyeditor, and layout designer for [Thurston Howl Publications](https://thurstonhowlpublications.com) and do this sort of stuff professionally. This tutorial was released initially as an in-house course.
