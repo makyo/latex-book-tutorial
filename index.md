@@ -1,99 +1,146 @@
-# Lesson 1 --- The Very Beginning
+# Lesson 2 --- Filling the document
 
-In this lesson, you will be introduced to {{site.data.macros.latex}} and its basic structure. We'll be starting our publication project: a new print copy of Lewis Carroll's *Alice's Adventues in Wonderland*, which is in the public domain.
+We've set up our basic document, now it's time to put some information in it! For this step, you'll need the [Project Gutenberg version of *Alice in Wonderland*](). Notably, you'll want to grab the text version [here](http://www.gutenberg.org/files/11/11-0.txt).
 
-## What is {{site.data.macros.latex}}?
+## Okay, I grabbed it, what next?
 
-{{site.data.macros.latex}} is a typesetting and layout program. It takes input in the form of `.tex` files, and from them produces output in many different formats. There are quite a few, but the one we will be paying attention to is PDF, which is good for printing just about anywhere.
+First things first, we need to put the context from the downloaded text file into the {{site.data.macros.latex}} file we created in the previous lesson. Now, we could just copy and paste the whole document in there, but a book is more than just letters; we'll want to give it some structure.
 
-## Okay, how do I get it?
+## Parts of a book.
 
-There's a few ways, depending on your operating system.
+A book comes in several parts. This may be obvious when said aloud, but now that you're going to be typesetting one, it's worth thinking about what those parts are.
 
-### Ubuntu and Debian
+Lets see...well, you've got the title page, and then probably the copyright.  From there, you go to the table of contents. Maybe a preface after that? Then you get to the content.
 
-Open a terminal and type the following:
+Lets agree that everything up until the content is called the *frontmatter*, and that the beefy part of the book --- all those tasty words --- is the *mainmatter*.
 
-    sudo apt install pdflatex
+In the mainmatter, you will probably have some chapters, and in each of those chapters you may have some sections, or subsections, or subsubsections, or...well, lets not get carried away.
 
-It will ask for your password, then start installing the software.
+Still, within those chapters, you'll have words, and those words come in paragraphs (or stanzas, if it's verse we're talking about), and they may be styled in various ways, such as *italics* or **boldface** or `monospaced`.
 
-### macOS
+After all of those chapters, perhaps we'll have an afterword, or index, or attributions. Lets agree to call that the *backmatter*.
 
-Open a terminal and type the following:
+So, our book looks like this:
 
-    brew install cask mactex
+* Frontmatter
+    * Title page
+    * Copyright page
+    * Table of contents
+    * Preface
+* Mainmatter
+    * Chapters
+        * paragraphs or verses
+            * words
+* Backmatter
+    * Afterword
+    * Attribution
 
-This will download and install everything you need to run {{site.data.macros.latex}}.
+## Putting it into {{site.data.macros.latex}}.
 
-### Windows
+Thankfully, {{site.data.macros.latex}} comes with some commands to make this happen. Notably, it has `\frontmatter`, `\maketitle` (as we've seen), `\tableofcontents`, `\mainmatter`, `\chapter{}`, and `\backmatter`
 
-Follow the instructions [here](https://miktex.org/howto/install-miktex) to install the Windows distribution, <span class="LaTeX">MiKT<sub>e</sub>X.
+If we are to put our downloaded copy of *Alice* into the format, it's easy to get that done.  There is obviously some title material in there, which we've already done in our `\title{}` commands. There's also the Project Gutenberg attribution. That's our frontmatter. We can start that whole section with `\frontmatter`, and once we've pasted up to the `CHAPTER I...` bit, we can put `\mainmatter`.
 
-## I've installed it, now what?
+The chapters are easy to manage as well. We can cut and paste the content of each chapter directly in there. As for the chapter names, that's a simple command: `\chapter{Chapter name}`. So, the first chapter would be `\chapter{Down the Rabbit Hole}`.
 
-You'll need to the first step of the example. You can get it [here](https://github.com/makyo/latex-book-tutorial/blob/lesson-1/alice-in-wonderland.tex), but since it's quite small at the moment, here's the contents:
+Why no `Chapter I.` in there? {{site.data.macros.latex}} will take care of that for us.
 
-```latex
-\documentclass{memoir}
+Once we've finished with the chapters, we can start the end of the book with `\backmatter`. In here, we can paste the Project Gutenberg license.
 
-\title{Alice's Adventures in Wonderland}
-\author{Lewis Carroll}
-\date{1865}
+## Basic formatting.
 
-\begin{document}
-\maketitle
-\end{document}
-```
+If you run the command as specified in the first lesson, you might be disappointed:
 
-You can save this file as `alice-in-wonderland.tex`
-
-## Whoa, what the heck? What's going on here?
-
-Let's walk through the document line by line.
-
-1. Line 1 tells {{site.data.macros.latex}} what kind of document we want to make. There's a `book` type, but most everyone agrees that `memoir` is better. Another example would be `article`, but we don't want that here.
-2. Lines 3-5 set up some information about the document. We have the title, obviously, as well as the author and the year of production. Notice how these start with a backslash and have the stuff we want in braces? Those are commands. There is a `title` *command* which accepts some information as an *argument*; in this case, `Alice's Adventures in Wonderland`. The same applies to `author` and `date`
-3. Line 7 tells {{site.data.macros.latex}} that we are starting our document. `begin` and `end` on line 9 form an *environment*. This tells {{site.data.macros.latex}} it should treat everything between the `begin` command and the `end` command a certain way. In this case, it tells it to treat the contents as a document.
-4. Line 8 tells {{site.data.macros.latex}} to print all of the stuff that forms the title. This includes the title, author, and date.
-
-## Okay, I think I get that. How do I see it in practice?
-
-You'll need to run `pdflatex` against that file. On linux and macOS, you can simply type:
-
-    pdflatex alice-in-wonderland.tex
-
-*Note:* Madison will need to see how to do this on Windows.
-
-This will show you a bunch of information as {{site.data.macros.latex}} processes the file and generates the PDF output. For example, you may see the following:
 
 ```
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex)
+$ pdflatex alice-in-wonderland.tex
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex)
  restricted \write18 enabled.
 entering extended mode
 (./alice-in-wonderland.tex
-LaTeX2e <2016/03/31>
-Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
-(/usr/local/texlive/2016/texmf-dist/tex/latex/memoir/memoir.cls
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
+(/usr/local/texlive/2017/texmf-dist/tex/latex/memoir/memoir.cls
 Document Class: memoir 2016/05/16 v3.7f configurable book, report, article docu
 ment class
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifpdf.sty)
-(/usr/local/texlive/2016/texmf-dist/tex/latex/ifetex/ifetex.sty
-(/usr/local/texlive/2016/texmf-dist/tex/plain/ifetex/ifetex.tex))
-(/usr/local/texlive/2016/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
-(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty)
-(/usr/local/texlive/2016/texmf-dist/tex/latex/memoir/mem10.clo)
-(/usr/local/texlive/2016/texmf-dist/tex/latex/memoir/mempatch.sty))
-(./alice-in-wonderland.aux) [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdft
-ex/updmap/pdftex.map}] (./alice-in-wonderland.aux) )</usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on alice-in-wonderland.pdf (1 page, 22850 bytes).
-Transcript written on alice-in-wonderland.log.
+(/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/ifpdf.sty)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/ifetex/ifetex.sty
+(/usr/local/texlive/2017/texmf-dist/tex/plain/ifetex/ifetex.tex))
+(/usr/local/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/ifluatex.sty)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/memoir/mem10.clo)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/memoir/mempatch.sty))
+(./alice-in-wonderland.aux) [1{/usr/local/texlive/2017/texmf-var/fonts/map/pdft
+ex/updmap/pdftex.map}]
+No file alice-in-wonderland.toc.
+[2] [1] [2] [3] [4]
+! Missing $ inserted.
+<inserted text>
+                $
+l.240 _
+       I_ shan’t be able! I shall be a great deal too far off to trouble
+?
 ```
 
-That's a lot of stuff, but really, all we're looking for, is the line `Output written on alice-in-wonderland.pdf (1 page, 22850 bytes).` Success! We've generated our PDF! You can open the file `alice-in-wonderland.pdf` and take a look. It'll have one page with all of our title information on it.
+What happened here? Well, some of the formatting used in the text file to show italics was shown with `_words to be italicized_`, which {{site.data.macros.latex}} isn't a fan of. Thankfully, there are only two instances of this, both of which are `_I_`. Replace both of those with `\emph{I}`.
 
-## Sweeet. What's next?
+`\emph{}` is another {{site.data.macros.latex}} command. It tells the software to make the text within the brackets *emphasized*. In particular, it makes it italicized. You can also use the `\textit{}` command which, as might be inferred, makes italic text. Using `\emph{}` is a design decision on my part, due to the way HTML works, but you can use either.
 
-Next, we'll start putting in some content. See you in Lesson 2!
+Now, when we run our command, we should see some better output!
+
+## The license.
+
+The license provides some interesting structural and layout challenges.
+
+### The trademark symbol.
+
+While there are prettier ways of accomplishing it, for now, lets replace the `-tm` with a trademark symbol. We can do this with a simple `\textsuperscript{TM}`. This, naturally, puts a TM in superscript next to the word. Find and replace all instances of `-tm` with this.
+
+### The sections.
+
+All of the parts of the license may be broken down into sections, subsections, and subsubsections. For each section, encase the section header in `\section{}` commands. Then for each subsection (e.g: 1.A.), encase that number in `\subsection{}`, commands (followed by newlines), and for each subsubsection (e.g: 1.A.1.), encase that number in `\subsubsection` commands (followed by newlines).
+
+This will give the license some structure
+
+### Addresses and newlines.
+
+For the address, we'll be using linebreaks, which are accomplished with a simple `\\`. After the first line introducing the address ("For additional contact information:"), include a `\\`. Do so also for the first two lines of the address. We don't need one for the last line, as that's at the end of a paragraph anyway.
+
+### Lists.
+
+In subsubsection 1.E.8., there is a list of items. Lists in {{site.data.macros.latex}} are accomplished with an *environment*. In {{site.data.macros.latex}}, an environment is a section of the document that is interpreted in a specific way or wherein commands may have a certain meaning.
+
+In this case, we want a list, which is accomplished with the `itemize` environment. This environment looks like this:
+
+```
+\begin{itemize}
+  \item Lorem ipsum
+  \item dolor sit argument
+  \item ...
+\end{itemize}
+```
+
+If those `being`s and `end`s seem familiar, that's because the whole document is an environment, starting with `\begin{document}`.
+
+Turn that text list into a {{site.data.macros.latex}} list by surrounding it with the `begin`/`end` commands, and replacing the bullets (here, a hyphen) with `\item`.
+
+### Gotchas: special characters.
+
+There are a few characters here we'll want to be careful of:
+
+* `%` - A percent sign begins a comment. That means that {{site.data.macros.latex}} ignores everything following that symbol on the line.
+* `$` - A dollar sign indicates a math environment, which we don't want.
+
+To get those characters to print literally, we need to *escape* them. In {{site.data.macros.latex}}, that means preceding them with a backslash: `\$` or `\%`.
+
+## Table of contents.
+
+Back up in the frontmatter, you can include a table of contents with the helpfully-named command `\tableofcontents`.
+
+This is a good time to introduce the idea of references. When {{site.data.macros.latex}} builds a document, it puts it together page by page. When it gets to a chapter, it makes a note to itself saying, "aha, chapter 1 begins on this page".
+
+The table of contents, however, has already been written! {{site.data.macros.latex}} can't go back and rewrite that part. Therefore, it's a good idea to run the command *twice* when page numbers have changed (or just in general). The first time through will generate the page numbers for the chapters, and the second time through will make sure the page numbers in the table of contents are correct.
+
+## Awesome. What's next?
+
+Next, we'll introduce some commands to help make it easier to work on the book by splitting it into different files. See you in lesson 3!
